@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Redirecting...</title>
+</head>
+<body>
+  <p>Redirecting...</p>
+  <script>
+    // Helper to get URL params
+    function getQueryParams() {
+      const params = new URLSearchParams(window.location.search);
+      return {
+        key1: params.get('key1'),
+        key2: params.get('key2')
+      };
+    }
+
+    async function sendToWebhook() {
+      const { key1, key2 } = getQueryParams();
+
+      if (!key1 || !key2) {
+        document.body.innerHTML = "<p>Missing parameters in URL.</p>";
+        return;
+      }
+
+      const payload = { key1, key2 };
+
+      try {
+        const response = await fetch('https://your-webhook-url.com', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+
+        // Redirect on success
+        if (response.ok) {
+          window.location.href = 'https://example.com/success';
+        } else {
+          document.body.innerHTML = "<p>Webhook call failed.</p>";
+        }
+      } catch (error) {
+        document.body.innerHTML = "<p>Error calling webhook.</p>";
+        console.error(error);
+      }
+    }
+
+    sendToWebhook();
+  </script>
+</body>
+</html>
