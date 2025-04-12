@@ -6,34 +6,16 @@
   <title>Redirecting...</title>
 </head>
 <body>
-  <p>Redirecting...</p>
+  <p>Redirecting to Spa Elevate... / מעביר לספא אלוויט...</p>
   <script>
-    // Helper to get URL params
-    function getQueryParams() {
-      const params = new URLSearchParams(window.location.search);
-      return {
-        key1: params.get('key1'),
-        key2: params.get('key2')
-      };
-    }
-
     async function sendToWebhook() {
-      const { key1, key2 } = getQueryParams();
-
-      if (!key1 || !key2) {
-        document.body.innerHTML = "<p>Missing parameters in URL.</p>";
-        return;
-      }
-
-      const payload = { key1, key2 };
-
       try {
-        const response = await fetch('https://hook.eu2.make.com/evnuxuf2xuv96j33p0ehvyvtgk9pjf92', {
+        const response = await fetch('https://webhook.botpress.cloud/11c2b263-d271-46ea-9e4d-64413b3d13db', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify(payload)
+          body: JSON.stringify({}) // Sending a blank object
         });
 
         // Redirect on success
