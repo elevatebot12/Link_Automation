@@ -13,7 +13,8 @@
         const response = await fetch('https://webhook.botpress.cloud/11c2b263-d271-46ea-9e4d-64413b3d13db', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'x-bp-secret': '1234'
           },
           body: JSON.stringify({}) // Sending a blank object
         });
